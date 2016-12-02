@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1480653057 source:/home/sig/projects/data_structures/main.cpp
+	<iostream>
+
+1480654166 source:/home/sig/projects/data_structures/src/stack.cpp
+	"stack.h"
+
+1480654371 /home/sig/projects/data_structures/include/stack.h
+	"node.h"
+
+1480654323 /home/sig/projects/data_structures/include/node.h
+	<stdint.h>
+
