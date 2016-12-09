@@ -5,9 +5,14 @@
 1480654166 source:/home/sig/projects/data_structures/src/stack.cpp
 	"stack.h"
 
-1480654371 /home/sig/projects/data_structures/include/stack.h
-	"node.h"
-
-1480654323 /home/sig/projects/data_structures/include/node.h
+1481294229 /home/sig/projects/data_structures/include/stack.h
 	<stdint.h>
+
+1481085351 /home/sig/projects/data_structures/include/node.h
+	<stdint.h>
+
+1481294043 source:/home/sig/projects/data_structures/src/AdjListNode.cpp
+	"AdjListNode.h"
+
+1481294042 /home/sig/projects/data_structures/include/AdjListNode.h
 

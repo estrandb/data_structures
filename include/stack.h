@@ -1,14 +1,14 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "node.h"
+#include <stdint.h>
 
 class stack
 {
     public:
         stack(){base = nullptr;}
-        void push(node* node);
-        node* pop();
+        void push();
+        void pop();
 
         uint32_t maxnodes;
 
@@ -17,8 +17,8 @@ class stack
     protected:
 
     private:
-        node* base;
-        void destroy(node* base);
+        uint32_t* base;
+        void destroy();
 };
 
 #endif // STACK_H
