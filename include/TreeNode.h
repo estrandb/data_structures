@@ -4,10 +4,7 @@
 template <typename T>
 struct TreeNode
 {
-    TreeNode* parent;
-    TreeNode* leftchild;
-    TreeNode* rightchild;
     T data;
-}
+};
 
 #endif // TREENODE_H_INCLUDED
