@@ -4,6 +4,7 @@
 template <typename T>
 struct TreeNode
 {
+    uint32_t nodeIndex;
     T data;
 };
 

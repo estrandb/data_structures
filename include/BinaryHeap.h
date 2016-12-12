@@ -20,15 +20,16 @@ class BinaryHeap
 
     private:
         std::vector<TreeNode<T> > Tree;
-        const int treeType;
+        const int heapType;
+        typedef sortType;
 
-        void BubbleDown(TreeNode<T> node);
-        void BubbleUp(TreeNode<T> node);
+        void BubbleDown(uint32_t index);
+        void BubbleUp(uint32_t index);
         void Heapify();
 };
 
 template<typename T>
-BinaryHeap<T>::BinaryHeap(int type) : treeType(type)
+BinaryHeap<T>::BinaryHeap(int type) : Tree(std::vector<TreeNode<T>()), heapType(type)
 {
     //ctor
 }
@@ -42,8 +43,30 @@ BinaryHeap<T>::~BinaryHeap()
 template<typename T>
 BinaryHeap<T>::InsertNode(TreeNode<T> node)
 {
+    uint32_t length = Tree.size();
+    Tree[length] = node;
 
+    BubbleUp(length);
 }
 
+template<typename T>
+BinaryHeap<T>::BubbleUp(uint32_t index)
+{
+    if (index == 0)
+    {
+        return;
+    }
+
+    uint32_t parentIndex = (index-1)/2;
+
+    if (heapType)
+    {//max heap
+
+    }
+    else
+    {//min heap
+
+    }
+}
 
 #endif // BINARYHEAP_H
