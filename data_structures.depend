@@ -16,3 +16,12 @@
 
 1481294042 /home/sig/projects/data_structures/include/AdjListNode.h
 
+1481502157 source:/home/sig/projects/data_structures/src/BinaryHeap.cpp
+	"BinaryHeap.h"
+
+1481502507 /home/sig/projects/data_structures/include/BinaryHeap.h
+	<vector>
+	"TreeNode.h"
+
+1481498233 /home/sig/projects/data_structures/include/TreeNode.h
+
