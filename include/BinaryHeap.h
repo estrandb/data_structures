@@ -61,11 +61,23 @@ BinaryHeap<T>::BubbleUp(uint32_t index)
 
     if (heapType)
     {//max heap
-
+        if (Tree[parentIndex].nodeIndex < Tree[index].nodeIndex)
+        {
+            auto temp = Tree[parentIndex];
+            Tree[parentIndex] = Tree[index];
+            Tree[index] = temp;
+            BubbleUp(parentIndex);
+        }
     }
     else
     {//min heap
-
+        if (Tree[parentIndex].nodeIndex > Tree[index].nodeIndex)
+        {
+            auto temp = Tree[parentIndex];
+            Tree[parentIndex] = Tree[index];
+            Tree[index] = temp;
+            BubbleUp(parentIndex);
+        }
     }
 }
 
