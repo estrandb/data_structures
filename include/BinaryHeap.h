@@ -61,7 +61,7 @@ BinaryHeap<T>::BubbleUp(uint32_t index)
 
     if (heapType)
     {//max heap
-        if (Tree[parentIndex].nodeIndex < Tree[index].nodeIndex)
+        if (Tree[parentIndex].sortByValue < Tree[index].sortByValue)
         {
             auto temp = Tree[parentIndex];
             Tree[parentIndex] = Tree[index];
@@ -71,7 +71,7 @@ BinaryHeap<T>::BubbleUp(uint32_t index)
     }
     else
     {//min heap
-        if (Tree[parentIndex].nodeIndex > Tree[index].nodeIndex)
+        if (Tree[parentIndex].sortByValue > Tree[index].sortByValue)
         {
             auto temp = Tree[parentIndex];
             Tree[parentIndex] = Tree[index];
@@ -79,6 +79,28 @@ BinaryHeap<T>::BubbleUp(uint32_t index)
             BubbleUp(parentIndex);
         }
     }
+}
+
+template<typename T>
+BinaryHeap<T>::BubbleDown(uint32_t index)
+{
+    uint32_t length = Tree.size();
+    uint32_t rightChildIndex = 2*index + 2;
+    uint32_t leftChildIndex = 2*index + 1;
+
+    if (leftChildIndex >= length)
+        return;//index is a leaf. already at bottom
+
+    uint32_t minIndex = index;
+
+    if (Tree[index].sortByValue > Tree[leftChildIndex].sortByValue)
+    {
+        minindex = leftChildIndex;
+    }
+
+    if (rightChildIndex < length) && Tree[index].sortByValue > Tree[minIndex].sortByValue)
+    {}
+
 }
 
 #endif // BINARYHEAP_H

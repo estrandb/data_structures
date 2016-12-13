@@ -4,7 +4,7 @@
 template <typename T>
 struct TreeNode
 {
-    uint32_t nodeIndex;
+    uint32_t sortByValue;
     T data;
 };
 
