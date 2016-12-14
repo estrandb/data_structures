@@ -41,10 +41,43 @@ BinaryHeap<T>::~BinaryHeap()
 }
 
 template<typename T>
+BinaryHeap<T>::Heapify()
+{
+    int length = Tree.size();
+    for(int i=length/2-1; i>=0; --i)
+        BubbleDown(i);
+}
+
+template<typename T>
+BinaryHeap<T>::GetTop()
+{
+    return Tree[0];
+}
+
+template<typename T>
+void MinHeap::DeleteMin()
+{
+    int length = Tree.size();
+
+    if(length == 0)
+    {
+        return;
+    }
+
+    Tree[0] = Tree[length-1];
+    Tree.pop_back();
+
+    BubbleDown(0);
+}
+
+template<typename T>
 BinaryHeap<T>::InsertNode(TreeNode<T> node)
 {
     uint32_t length = Tree.size();
-    Tree[length] = node;
+    Tree.push_back(node);
+
+    uint32_t postPushLength = Tree.size();
+    Tree[postPushLength].sortByValue = postPushLength;
 
     BubbleUp(length);
 }
@@ -66,6 +99,8 @@ BinaryHeap<T>::BubbleUp(uint32_t index)
             auto temp = Tree[parentIndex];
             Tree[parentIndex] = Tree[index];
             Tree[index] = temp;
+            Tree[index].sortByValue = index;
+            Tree[parentIndex].sortByValue = parentIndex;
             BubbleUp(parentIndex);
         }
     }
@@ -76,6 +111,8 @@ BinaryHeap<T>::BubbleUp(uint32_t index)
             auto temp = Tree[parentIndex];
             Tree[parentIndex] = Tree[index];
             Tree[index] = temp;
+            Tree[index].sortByValue = index;
+            Tree[parentIndex].sortByValue = parentIndex;
             BubbleUp(parentIndex);
         }
     }
@@ -95,12 +132,22 @@ BinaryHeap<T>::BubbleDown(uint32_t index)
 
     if (Tree[index].sortByValue > Tree[leftChildIndex].sortByValue)
     {
-        minindex = leftChildIndex;
+        minIndex = leftChildIndex;
     }
 
     if (rightChildIndex < length) && Tree[index].sortByValue > Tree[minIndex].sortByValue)
-    {}
+    {
+        minIndex = rightChildIndex;
+    }
 
+    if(minIndex != index)
+    {
+        //need to swap
+        auto temp = Tree[index];
+        Tree[index] = Tree[minIndex];
+        Tree[minIndex] = temp;
+        BubbleDown(minIndex);
+    }
 }
 
 #endif // BINARYHEAP_H
