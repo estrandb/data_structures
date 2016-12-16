@@ -4,11 +4,13 @@
 #include <vector>
 #include "TreeNode.h"
 
+const int minHeap = 0;
+const int maxHeap = 1;
+
 template <typename T>
 class BinaryHeap
 {
     public:
-        //0 == min, 1 == max
         BinaryHeap(int type);
         virtual ~BinaryHeap();
 
@@ -20,8 +22,7 @@ class BinaryHeap
 
     private:
         std::vector<TreeNode<T> > Tree;
-        const int heapType;
-        typedef sortType;
+        int heapType;
 
         void BubbleDown(uint32_t index);
         void BubbleUp(uint32_t index);
@@ -29,7 +30,7 @@ class BinaryHeap
 };
 
 template<typename T>
-BinaryHeap<T>::BinaryHeap(int type) : Tree(std::vector<TreeNode<T>()), heapType(type)
+BinaryHeap<T>::BinaryHeap(int type) : Tree(std::vector<TreeNode<T> >()), heapType(type)
 {
     //ctor
 }
@@ -41,7 +42,7 @@ BinaryHeap<T>::~BinaryHeap()
 }
 
 template<typename T>
-BinaryHeap<T>::Heapify()
+void BinaryHeap<T>::Heapify()
 {
     int length = Tree.size();
     for(int i=length/2-1; i>=0; --i)
@@ -49,13 +50,13 @@ BinaryHeap<T>::Heapify()
 }
 
 template<typename T>
-BinaryHeap<T>::GetTop()
+TreeNode<T> BinaryHeap<T>::GetTop()
 {
     return Tree[0];
 }
 
 template<typename T>
-void MinHeap::DeleteMin()
+void BinaryHeap<T>::DeleteTop()
 {
     int length = Tree.size();
 
@@ -71,7 +72,7 @@ void MinHeap::DeleteMin()
 }
 
 template<typename T>
-BinaryHeap<T>::InsertNode(TreeNode<T> node)
+void BinaryHeap<T>::InsertNode(TreeNode<T> node)
 {
     uint32_t length = Tree.size();
     Tree.push_back(node);
@@ -83,7 +84,7 @@ BinaryHeap<T>::InsertNode(TreeNode<T> node)
 }
 
 template<typename T>
-BinaryHeap<T>::BubbleUp(uint32_t index)
+void BinaryHeap<T>::BubbleUp(uint32_t index)
 {
     if (index == 0)
     {
@@ -119,7 +120,7 @@ BinaryHeap<T>::BubbleUp(uint32_t index)
 }
 
 template<typename T>
-BinaryHeap<T>::BubbleDown(uint32_t index)
+void BinaryHeap<T>::BubbleDown(uint32_t index)
 {
     uint32_t length = Tree.size();
     uint32_t rightChildIndex = 2*index + 2;
@@ -135,7 +136,7 @@ BinaryHeap<T>::BubbleDown(uint32_t index)
         minIndex = leftChildIndex;
     }
 
-    if (rightChildIndex < length) && Tree[index].sortByValue > Tree[minIndex].sortByValue)
+    if ((rightChildIndex < length) && (Tree[index].sortByValue > Tree[minIndex].sortByValue))
     {
         minIndex = rightChildIndex;
     }
