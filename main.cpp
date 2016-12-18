@@ -18,10 +18,10 @@ int main()
     //util->PrintAdjList(vertices, numVertices);
 
     std::vector<uint32_t> processedVertices;
-    uint32_t computedShortestPaths[200] = {0};
+    uint32_t computedShortestPaths[numVertices] = {1000000};
+    computedShortestPaths[source_vert] = 0;
 
     uint32_t current_vert = source_vert;
-
     while (processedVertices.size() != vertices.size())
     {
         processedVertices.push_back(current_vert);
@@ -29,12 +29,18 @@ int main()
         {
             if ((i%2) == 0)
             {
+                uint32_t adjVertex = i;
+                uint32_t adjEdge = i + 1;
                 /*
                 take each vertex in processedVertices and find edge going to vertices
                 calculate dijkstra criterion and store that into heap
                 */
-
-
+                if (computedShortestPaths[i] == 1000000)
+                {
+                    computedShortestPaths[i] = computedShortestPaths[current_vert] + vertices[current_vert][adjEdge];
+                }
+                AdjListNode* ajdListNode = new AdjListNode();
+                //need to add node to heap.
             }
         }
 
