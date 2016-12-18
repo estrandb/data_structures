@@ -7,16 +7,20 @@ using namespace std;
 int main()
 {
     auto binheap = new BinaryHeap<AdjListNode>(0);
-    auto node = new AdjListNode();
-    auto treeNode = new TreeNode<AdjListNode>();
 
-    node->dest[0] = 1;
-    node->weight[0] = 20;
+    for (int i = 0 ; i < 10 ; i++)
+    {
+        auto node = new AdjListNode();
+        auto treeNode = new TreeNode<AdjListNode>();
 
-    treeNode->data = *node;
-    treeNode->sortByValue = node->dest[0];
+        node->dest[i] = i+1;
+        node->weight[i] = 20;
 
-    binheap->InsertNode(*treeNode);
+        treeNode->data = *node;
+        treeNode->sortByValue = i;//djikstras greedy criteria for nodes we haven't looked at yet, V
+
+        binheap->InsertNode(*treeNode);
+    }
 
     return 0;
 }
