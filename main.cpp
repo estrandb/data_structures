@@ -1,26 +1,45 @@
 #include <iostream>
 #include "BinaryHeap.h"
 #include "AdjListNode.h"
-
-using namespace std;
+#include "Utilities.h"
 
 int main()
 {
     auto binheap = new BinaryHeap<AdjListNode>(0);
 
-    for (int i = 0 ; i < 10 ; i++)
+    std::string const filePath = "/home/sig/projects/algorithms/graph.txt";
+    int const numVertices = 200;
+    int const source_vert = 0;
+
+    std::vector<std::vector<uint32_t> > vertices;
+
+    std::unique_ptr<Utilities> util(new Utilities());
+    util->AdjLengthListToVec(vertices, filePath);
+    //util->PrintAdjList(vertices, numVertices);
+
+    std::vector<uint32_t> processedVertices;
+    uint32_t computedShortestPaths[200] = {0};
+
+    uint32_t current_vert = source_vert;
+
+    while (processedVertices.size() != vertices.size())
     {
-        auto node = new AdjListNode();
-        auto treeNode = new TreeNode<AdjListNode>();
+        processedVertices.push_back(current_vert);
+        for (int i = 0; i < processedVertices.size(); i++)
+        {
+            if ((i%2) == 0)
+            {
+                /*
+                take each vertex in processedVertices and find edge going to vertices
+                calculate dijkstra criterion and store that into heap
+                */
 
-        node->dest[i] = i+1;
-        node->weight[i] = 20;
 
-        treeNode->data = *node;
-        treeNode->sortByValue = i;//djikstras greedy criteria for nodes we haven't looked at yet, V
+            }
+        }
 
-        binheap->InsertNode(*treeNode);
     }
+
 
     return 0;
 }
