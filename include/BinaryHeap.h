@@ -14,9 +14,11 @@ class BinaryHeap
         BinaryHeap(int type);
         virtual ~BinaryHeap();
 
-        void InsertNode(TreeNode<T> node);
+        void InsertNode(T node, uint32_t sortByValue);
         void DeleteTop();
-        TreeNode<T> GetTop();
+        void DeleteAt(uint32_t index);
+        T GetTop();
+        bool Empty();
 
     protected:
 
@@ -42,6 +44,14 @@ BinaryHeap<T>::~BinaryHeap()
 }
 
 template<typename T>
+bool BinaryHeap<T>::Empty()
+{
+    if (Tree.size() == 0)
+        return true;
+    return false;
+}
+
+template<typename T>
 void BinaryHeap<T>::Heapify()
 {
     int length = Tree.size();
@@ -50,9 +60,9 @@ void BinaryHeap<T>::Heapify()
 }
 
 template<typename T>
-TreeNode<T> BinaryHeap<T>::GetTop()
+T BinaryHeap<T>::GetTop()
 {
-    return Tree[0];
+    return Tree[0].data;
 }
 
 template<typename T>
@@ -65,22 +75,36 @@ void BinaryHeap<T>::DeleteTop()
         return;
     }
 
-    Tree[0] = Tree[length-1];
+    Tree[0] = Tree[length - 1];
     Tree.pop_back();
 
     BubbleDown(0);
 }
 
 template<typename T>
-void BinaryHeap<T>::InsertNode(TreeNode<T> node)
+void BinaryHeap<T>::DeleteAt(uint32_t index)
 {
+    if (index == 0)
+        DeleteTop();
+    if (index >= Tree.size())
+        return;
+
+    int length = Tree.size();
+    if (length == 0)
+        return;
+
+    Tree[index] = Tree[length - 1];
+    Tree.pop_back();
+    BubbleDown(index);
+}
+
+template<typename T>
+void BinaryHeap<T>::InsertNode(T node, uint32_t sortByValue)
+{
+    TreeNode<T>* treeNode = new TreeNode<T>(node, sortByValue);
+    Tree.push_back(*treeNode);
     uint32_t length = Tree.size();
-    Tree.push_back(node);
-
-    uint32_t postPushLength = Tree.size();
-    Tree[postPushLength].sortByValue = postPushLength;
-
-    BubbleUp(length);
+    BubbleUp(length - 1);
 }
 
 template<typename T>
@@ -100,8 +124,6 @@ void BinaryHeap<T>::BubbleUp(uint32_t index)
             auto temp = Tree[parentIndex];
             Tree[parentIndex] = Tree[index];
             Tree[index] = temp;
-            Tree[index].sortByValue = index;
-            Tree[parentIndex].sortByValue = parentIndex;
             BubbleUp(parentIndex);
         }
     }
@@ -112,17 +134,16 @@ void BinaryHeap<T>::BubbleUp(uint32_t index)
             auto temp = Tree[parentIndex];
             Tree[parentIndex] = Tree[index];
             Tree[index] = temp;
-            Tree[index].sortByValue = index;
-            Tree[parentIndex].sortByValue = parentIndex;
             BubbleUp(parentIndex);
         }
     }
 }
 
+//TODO: need to implement heap type
 template<typename T>
 void BinaryHeap<T>::BubbleDown(uint32_t index)
 {
-    uint32_t length = Tree.size();
+    uint32_t length = Tree.size() - 1;
     uint32_t rightChildIndex = 2*index + 2;
     uint32_t leftChildIndex = 2*index + 1;
 

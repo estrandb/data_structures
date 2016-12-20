@@ -3,49 +3,52 @@
 #include "AdjListNode.h"
 #include "Utilities.h"
 
+void InitializeNode(const std::vector<uint32_t>& sourceNode, AdjListNode* destNode)
+{
+    for (uint32_t i = 0; i < sourceNode.size(); i++)
+    {
+        if (i%2 == 0)
+        {
+            destNode->weightVector.at(sourceNode[i] - 1) = sourceNode[i+1];
+        }
+    }
+}
+
 int main()
 {
-    auto binheap = new BinaryHeap<AdjListNode>(0);
-
     std::string const filePath = "/home/sig/projects/algorithms/graph.txt";
     int const numVertices = 200;
     int const source_vert = 0;
 
     std::vector<std::vector<uint32_t> > vertices;
+    std::vector<std::vector<uint32_t> > processedVertices;
+
+    std::vector<uint32_t> computedShortestPaths(numVertices, 1000000);
+    computedShortestPaths.at(source_vert) = 0;
+
+    auto binheap = new BinaryHeap<AdjListNode>(0);
 
     std::unique_ptr<Utilities> util(new Utilities());
     util->AdjLengthListToVec(vertices, filePath);
     //util->PrintAdjList(vertices, numVertices);
 
-    std::vector<uint32_t> processedVertices;
-    uint32_t computedShortestPaths[numVertices] = {1000000};
-    computedShortestPaths[source_vert] = 0;
+    if (vertices.empty())
+        return 0;
 
-    uint32_t current_vert = source_vert;
-    while (processedVertices.size() != vertices.size())
+    for (uint32_t i = 0; i < numVertices; i++)
     {
-        processedVertices.push_back(current_vert);
-        for (int i = 0; i < processedVertices.size(); i++)
-        {
-            if ((i%2) == 0)
-            {
-                uint32_t adjVertex = i;
-                uint32_t adjEdge = i + 1;
-                /*
-                take each vertex in processedVertices and find edge going to vertices
-                calculate dijkstra criterion and store that into heap
-                */
-                if (computedShortestPaths[i] == 1000000)
-                {
-                    computedShortestPaths[i] = computedShortestPaths[current_vert] + vertices[current_vert][adjEdge];
-                }
-                AdjListNode* ajdListNode = new AdjListNode();
-                //need to add node to heap.
-            }
-        }
-
+        auto node = new AdjListNode(i, numVertices);
+        InitializeNode(vertices[i], node);
+        binheap->InsertNode(*node, computedShortestPaths[i]);
     }
 
+    while (!binheap->Empty())
+    {
+        //auto currentNode = binheap->GetTop();
+        //processedVertices[currentNode]
+
+
+    }
 
     return 0;
 }
