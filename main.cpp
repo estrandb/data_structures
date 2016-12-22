@@ -67,7 +67,7 @@ int main()
         for (uint32_t i = 0; i < vertices[currentNode.index].size(); i++)
         {
             if ((i%2) == 0)
-            {
+            {//need to delete a node somewhere.... pull proper node out of tree
                 uint32_t adjNodeIndex = vertices[currentNode.index][i] - 1;
 
                 if (procVert[adjNodeIndex] == 1)
