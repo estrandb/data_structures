@@ -23,7 +23,6 @@ int main()
     std::vector<std::vector<uint32_t> > vertices;
     std::vector<std::vector<uint32_t> > processedVertices;
     uint32_t procVert[numVertices] = {0};
-    uint32_t nodeIndexInTree[numVertices] = {0};
 
     std::vector<uint32_t> computedShortestPaths(numVertices, 1000000);
     computedShortestPaths.at(source_vert) = 0;
@@ -32,7 +31,6 @@ int main()
 
     std::unique_ptr<Utilities> util(new Utilities());
     util->AdjLengthListToVec(vertices, filePath);
-    //util->PrintAdjList(vertices, numVertices);
 
     if (vertices.empty())
         return 0;
@@ -41,12 +39,6 @@ int main()
     InitializeNode(vertices[0], node);
     binheap->InsertNode(*node, computedShortestPaths[0]);
 
-    /*for (uint32_t i = 0; i < numVertices; i++)
-    {
-        auto node = new AdjListNode(i, numVertices);
-        InitializeNode(vertices[i], node);
-        binheap->InsertNode(*node, computedShortestPaths[i]);
-    }*/
 
     while (!binheap->Empty())
     {
@@ -67,7 +59,7 @@ int main()
         for (uint32_t i = 0; i < vertices[currentNode.index].size(); i++)
         {
             if ((i%2) == 0)
-            {//need to delete a node somewhere.... pull proper node out of tree
+            {
                 uint32_t adjNodeIndex = vertices[currentNode.index][i] - 1;
 
                 if (procVert[adjNodeIndex] == 1)
