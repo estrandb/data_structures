@@ -12,7 +12,6 @@ void InitializeNode(const std::vector<uint32_t>& sourceNode, AdjListNode* destNo
             destNode->weightVector.at(sourceNode[i] - 1) = sourceNode[i+1];
         }
     }
-    return;
 }
 
 int main()
