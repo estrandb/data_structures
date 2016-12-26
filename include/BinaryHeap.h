@@ -40,7 +40,7 @@ BinaryHeap<T>::BinaryHeap(int type) : Tree(std::vector<TreeNode<T> >()), heapTyp
 template<typename T>
 BinaryHeap<T>::~BinaryHeap()
 {
-    //dtor
+    delete[] &Tree;
 }
 
 template<typename T>
