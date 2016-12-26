@@ -40,6 +40,10 @@ BinaryHeap<T>::BinaryHeap(int type) : Tree(std::vector<TreeNode<T> >()), heapTyp
 template<typename T>
 BinaryHeap<T>::~BinaryHeap()
 {
+    for (uint32_t i = 0; i < Tree.size(); i++)
+    {
+        delete &Tree[i];
+    }
     delete[] &Tree;
 }
 

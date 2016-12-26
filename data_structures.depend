@@ -1,8 +1,5 @@
 # depslib dependency file v1.0
-1482601390 source:/home/sig/projects/data_structures/main.cpp
-	<iostream>
-	"BinaryHeap.h"
-	"AdjListNode.h"
+1482789585 source:/home/sig/projects/data_structures/main.cpp
 	"Utilities.h"
 
 1480654166 source:/home/sig/projects/data_structures/src/stack.cpp
