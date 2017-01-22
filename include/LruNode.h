@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-template <typedef T>
+template <typename T>
 struct LruNode
 {
     LruNode(T nodeData, uint32_t key) : Data(nodeData), Key(key){}
