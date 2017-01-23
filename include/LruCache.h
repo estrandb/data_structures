@@ -16,7 +16,6 @@ class LruCache
 
         T Reference(uint32_t key);
 
-
     protected:
 
     private:
@@ -32,7 +31,7 @@ class LruCache
 template <typename T>
 T LruCache<T>::Reference(LruNode<T> node)
 {
-    if (key == null)
+    if (node.Key == null)
         return;
 
     T data = nullptr;
@@ -41,19 +40,23 @@ T LruCache<T>::Reference(LruNode<T> node)
     if (CacheMap->count(node.Key) > 0)
     {//cache hit
         CacheQ->erase(CacheMap->at(node.Key));
-        CacheQ->push_back(node);
-        data = node->Data;
+        CacheQ->push_front(node);
+        CacheMap->at(node.Key) = CacheQ->begin();
     }
-    else if (CacheMap->count(key) == 0)
+    else if (CacheMap->count(node.Key) == 0)
     {//cache miss
         if (CacheQ->size() == CacheSize)
         {
-            CacheQ->pop_front();
-            CacheQ->push_back(node);
+            LruNode leastNode = CacheQ->back();
+            CacheQ->pop_back();
+            CacheQ->push_front(node);
+            CacheMap->erase(leastNode.Key);
+            CacheMap->insert(std::make_pair(node.Key, CacheQ->begin()));
         }
         else
         {
-            CacheQ->push_back(node);
+            CacheQ->push_front(node);
+            CacheMap->insert(std::make_pair(node.Key, CacheQ->begin()));
         }
     }
 
