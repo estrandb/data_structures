@@ -46,7 +46,6 @@
 		<Unit filename="include/LruNode.h" />
 		<Unit filename="include/TreeNode.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/LruCache.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
